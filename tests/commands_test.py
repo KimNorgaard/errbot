@@ -354,3 +354,11 @@ def test_command_not_found_with_space_in_bot_prefix(testbot):
     testbot.bot_config.BOT_PREFIX = '! '
     assert 'Command "blah" not found.' in testbot.exec_command('! blah')
     assert 'Command "blah" / "blah toto" not found.' in testbot.exec_command('! blah toto')
+
+
+def test_plugin_info_command(testbot):
+    output = testbot.exec_command('!plugin info Help')
+    assert 'name: Help' in output
+    assert 'module: help' in output
+    assert 'help.py' in output
+    assert 'log level: NOTSET' in output
